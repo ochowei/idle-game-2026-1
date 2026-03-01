@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw } from 'lucide-react';
+import type { Realm } from './types/game';
 
 // --- Constants & Data ---
-const REALMS = [
+const REALMS: Realm[] = [
   { name: "練氣期", threshold: 1000, multiplier: 1 },
   { name: "筑基期", threshold: 50000, multiplier: 5 },
   { name: "金丹期", threshold: 2000000, multiplier: 25 },
