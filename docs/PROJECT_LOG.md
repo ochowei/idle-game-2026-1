@@ -3,3 +3,4 @@
 - [2024-03-01] (Coder-Bot) 完成 T-003 [Done]：在 GameState 加入 saveVersion 欄位並更新 INITIAL_STATE 的型別
 [2024-03-01] (Coder-Bot) 開始執行 T-004：新增 src/utils/save.ts 檔案，並實作 migrateSaveData(data: any) 與 migrateV1toV2 函式以進行存檔版本遷移（確保舊存檔可升級），並設定為匯出
 [2024-03-01] (Coder-Bot) 完成 T-004 [Done]：新增 migrateSaveData 存檔遷移函式
+- [2026-03-02] (PM-Alpha) 指派 T-005（關聯 設計任務T-080 的第 3 步）給 Coder-Bot。
