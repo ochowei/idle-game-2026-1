@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw } from 'lucide-react';
-import type { Realm } from './types/game';
+import type { Realm, GameState, Facility } from './types/game';
 
 // --- Constants & Data ---
 const REALMS: Realm[] = [
@@ -12,7 +12,7 @@ const REALMS: Realm[] = [
   { name: "大乘期", threshold: Infinity, multiplier: 3125 }
 ];
 
-const INITIAL_FACILITIES = [
+const INITIAL_FACILITIES: Facility[] = [
   { id: 'array', name: '聚靈陣', baseCost: 10, baseProduction: 1, level: 0 },
   { id: 'garden', name: '藥園', baseCost: 100, baseProduction: 10, level: 0 },
   { id: 'vein', name: '靈脈', baseCost: 1100, baseProduction: 80, level: 0 },
@@ -20,7 +20,8 @@ const INITIAL_FACILITIES = [
   { id: 'tree', name: '悟道樹', baseCost: 130000, baseProduction: 2600, level: 0 }
 ];
 
-const INITIAL_STATE = {
+const INITIAL_STATE: GameState = {
+  saveVersion: 1,
   qi: 0,
   realmIndex: 0,
   facilities: INITIAL_FACILITIES,
@@ -62,7 +63,7 @@ const calculateCost = (baseCost: number, level: number): number => {
  *    說明：每個設施的產量是線性的（等級 * 基礎產量）。
  *          境界突破會提供一個全域的倍率加成（multiplier），這是遊戲中後期數值爆發的關鍵。
  */
-const calculateProduction = (facilities: typeof INITIAL_FACILITIES, realmMultiplier: number): number => {
+const calculateProduction = (facilities: Facility[], realmMultiplier: number): number => {
   let total = 0;
   facilities.forEach(f => {
     total += f.baseProduction * f.level;
@@ -72,7 +73,7 @@ const calculateProduction = (facilities: typeof INITIAL_FACILITIES, realmMultipl
 
 export default function App() {
   // --- State Management ---
-  const [gameState, setGameState] = useState(() => {
+  const [gameState, setGameState] = useState<GameState>(() => {
     const saved = localStorage.getItem('xianxia_save');
     if (saved) {
       try {
