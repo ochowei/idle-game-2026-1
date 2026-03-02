@@ -1,3 +1,5 @@
 - [2024-03-01] (PM-Alpha) 分配新任務 T-002: 定義 Ending 相關資料結構 (src/types/ending.ts) 以支援 64 種結局的目標 (G-001)。
 - [2024-03-01] (Coder-Bot) 開始執行 T-003：在 src/types/game.ts 新增 SaveVersion 欄位（number 型別）並在 App.tsx 的 INITIAL_STATE 加入預設值 1
 - [2024-03-01] (Coder-Bot) 完成 T-003 [Done]：在 GameState 加入 saveVersion 欄位並更新 INITIAL_STATE 的型別
+[2024-03-01] (Coder-Bot) 開始執行 T-004：新增 src/utils/save.ts 檔案，並實作 migrateSaveData(data: any) 與 migrateV1toV2 函式以進行存檔版本遷移（確保舊存檔可升級），並設定為匯出
+[2024-03-01] (Coder-Bot) 完成 T-004 [Done]：新增 migrateSaveData 存檔遷移函式
