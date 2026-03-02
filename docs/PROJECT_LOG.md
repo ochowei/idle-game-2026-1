@@ -6,3 +6,4 @@
 - [2026-03-02] (PM-Alpha) 指派 T-005（關聯 設計任務T-080 的第 3 步）給 Coder-Bot。
 [2026-03-02] (Coder-Bot) 開始執行 T-005：在 src/App.tsx 引入 migrateSaveData 函式，並於 useState 初始化讀取 localStorage 存檔時，對解析出的 JSON 資料套用 migrateSaveData 進行舊格式遷移
 [2026-03-02] (Coder-Bot) 完成 T-005 [Done]：在 App.tsx 引入並套用 migrateSaveData 進行舊格式遷移
+- [2026-03-02] (PM-Alpha) 指派 T-006（關聯 設計任務T-080 的第 4 步）給 Coder-Bot。
