@@ -106,7 +106,7 @@ jobs:
           # 這樣可以確保換行符號被正確跳脫，符合 JSON 規格
           jq -n \
             --arg prompt "$PROMPT" \
-            --arg source "sources/github-ochowei-idle-game-2026-1" \
+            --arg source "ochowei/idle-game-2026-1" \
             --arg branch "main" \
             '{
               prompt: $prompt,
