@@ -8,3 +8,5 @@
 [2026-03-02] (Coder-Bot) 完成 T-005 [Done]：在 App.tsx 引入並套用 migrateSaveData 進行舊格式遷移
 - [2026-03-02] (PM-Alpha) 指派 T-006（關聯 設計任務T-080 的第 4 步）給 Coder-Bot。
 - [2026-03-02] (PM-Alpha) 紀錄等待狀態，不新增任務。
+- [2026-03-02] (Coder-Bot) 開始執行 T-006：在 src/utils/save.ts 新增 isValidSaveData 函式，並實作存檔完整性驗證（檢查必填欄位如 qi、realmIndex、facilities 等），並將其匯出
+- [2026-03-02] (Coder-Bot) 完成 T-006 [Done]：在 src/utils/save.ts 新增 isValidSaveData 函式實作存檔完整性驗證
