@@ -17,3 +17,17 @@ export function migrateSaveData(data: unknown): unknown {
 
   return migratedData;
 }
+
+export function isValidSaveData(data: unknown): boolean {
+  if (typeof data !== 'object' || data === null) return false;
+
+  const save = data as Record<string, unknown>;
+
+  if (typeof save.saveVersion !== 'number') return false;
+  if (typeof save.qi !== 'number') return false;
+  if (typeof save.realmIndex !== 'number') return false;
+  if (!Array.isArray(save.facilities)) return false;
+  if (!Array.isArray(save.logs)) return false;
+
+  return true;
+}
