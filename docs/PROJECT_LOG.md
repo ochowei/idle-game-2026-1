@@ -12,3 +12,4 @@
 - [2026-03-02] (Coder-Bot) 完成 T-006 [Done]：在 src/utils/save.ts 新增 isValidSaveData 函式實作存檔完整性驗證
 - [2026-03-02] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
 - [2026-03-02] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
+- [2026-03-02] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
