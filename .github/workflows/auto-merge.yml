@@ -1,20 +1,40 @@
-# .github/workflows/auto-merge.yml
 name: Auto Merge PRs
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # 每 10 分鐘
-  workflow_dispatch:         # 允許手動觸發
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
 
 jobs:
   auto-merge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Merge all mergeable PRs
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            async function getMergeableStatus(github, context, pull_number, maxRetries = 5) {
+              for (let i = 0; i < maxRetries; i++) {
+                const { data: detail } = await github.rest.pulls.get({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number,
+                });
+
+                if (detail.mergeable !== null) {
+                  return detail;
+                }
+
+                console.log(`PR #${pull_number} mergeable is null, retrying in 3s... (${i + 1}/${maxRetries})`);
+                await new Promise(resolve => setTimeout(resolve, 3000));
+              }
+              return null;
+            }
+
             const { data: prs } = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -22,12 +42,12 @@ jobs:
             });
 
             for (const pr of prs) {
-              // 取得詳細資訊以確認 mergeable 狀態
-              const { data: detail } = await github.rest.pulls.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: pr.number,
-              });
+              const detail = await getMergeableStatus(github, context, pr.number);
+
+              if (!detail) {
+                console.log(`Skipping PR #${pr.number}: could not determine mergeable status after retries`);
+                continue;
+              }
 
               if (detail.mergeable === true && detail.mergeable_state === 'clean') {
                 console.log(`Merging PR #${pr.number}: ${pr.title}`);
@@ -35,7 +55,7 @@ jobs:
                   owner: context.repo.owner,
                   repo: context.repo.repo,
                   pull_number: pr.number,
-                  merge_method: 'squash', // 或 'merge' / 'rebase'
+                  merge_method: 'squash',
                 });
               } else {
                 console.log(`Skipping PR #${pr.number}: mergeable=${detail.mergeable}, state=${detail.mergeable_state}`);
