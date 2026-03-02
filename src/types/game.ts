@@ -3,3 +3,19 @@ export interface Realm {
   threshold: number;
   multiplier: number;
 }
+
+export interface Facility {
+  id: string;
+  name: string;
+  baseCost: number;
+  baseProduction: number;
+  level: number;
+}
+
+export interface GameState {
+  saveVersion: number;
+  qi: number;
+  realmIndex: number;
+  facilities: Facility[];
+  logs: string[];
+}
