@@ -658,7 +658,7 @@ interface EventResult {
 | M-007 | T-070 | 遊戲主介面視覺優化 | waiting | T-020 |
 | M-007 | T-071 | 動畫反饋系統 | waiting | T-070 |
 | M-007 | T-072 | 行動裝置體驗優化 | waiting | T-070 |
-| M-008 | T-080 | 存檔系統強化 | waiting | — |
+| M-008 | T-080 | 存檔系統強化 | in-progress | — |
 | M-008 | T-081 | 遊戲統計追蹤 | waiting | T-080 |
 
 **總計：25 個任務 × ~10 commits = ~250 commits**
