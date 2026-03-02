@@ -134,7 +134,8 @@ jobs:
                 githubRepoContext: {
                   startingBranch: $branch
                 }
-              }
+              },
+              "automationMode": "AUTO_CREATE_PR"
             }' > payload.json
             
           # 2. 執行 curl 呼叫 Jules API 並將 JSON 檔案作為 Request Body
