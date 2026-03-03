@@ -52,6 +52,17 @@ export function isValidSaveData(data: unknown): data is GameState {
 
 export const SAVE_FILENAME = 'xianxia-save.json';
 
+export function importSaveData(json: string): GameState | null {
+  try {
+    const parsed: unknown = JSON.parse(json);
+    const migrated = migrateSaveData(parsed);
+    if (!isValidSaveData(migrated)) return null;
+    return migrated;
+  } catch {
+    return null;
+  }
+}
+
 export function exportSaveData(data: GameState): void {
   try {
     const jsonString = JSON.stringify(data, null, 2);
