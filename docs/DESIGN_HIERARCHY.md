@@ -641,7 +641,7 @@ interface EventResult {
 | M-002 | T-020 | 境界資料與機制完整化 | waiting | T-010 |
 | M-002 | T-021 | 境界突破演出系統 | waiting | T-020 |
 | M-002 | T-022 | 境界被動技能系統 | waiting | T-020 |
-| M-003 | T-030 | 玩家屬性定義與資料結構 | waiting | — |
+| M-003 | T-030 | 玩家屬性定義與資料結構 | in-progress | — |
 | M-003 | T-031 | 屬性成長機制 | waiting | T-030 |
 | M-003 | T-032 | 屬性對核心數值的影響 | waiting | T-030, T-031 |
 | M-004 | T-040 | 事件資料結構設計 | waiting | T-030 |

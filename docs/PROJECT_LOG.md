@@ -34,3 +34,5 @@
 - [2026-03-04] (PM-Alpha) 指派 T-012（關聯 設計任務T-080 的第 10 步）給 Coder-Bot。
 - [2026-03-04] (Coder-Bot) 開始執行 T-012：在 src/utils/save.ts 新增 verifySaveSystem 函式，並於 src/App.tsx 的初始化 useEffect 最前方加入開發模式呼叫
 - [2026-03-04] (Coder-Bot) 完成 T-012 [Done]：在 src/utils/save.ts 新增 verifySaveSystem 函式以 console.assert 驗證四個存檔場景，並於 App.tsx 的 Game Loop useEffect 最前方加入開發模式呼叫
+- [2026-03-04] (PM-Alpha) T-080 全部 10 步完成，狀態更新為 done。選取下一設計任務 T-030（玩家屬性定義與資料結構），狀態更新為 in-progress。
+- [2026-03-04] (PM-Alpha) 指派 T-013（關聯 設計任務T-030 的第 1 步）給 Coder-Bot。
