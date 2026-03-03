@@ -18,3 +18,4 @@
 
 - [2026-03-03] (Coder-Bot) 開始執行 T-007：在 src/App.tsx 的存檔讀取初始化流程中串接 isValidSaveData 驗證；當驗證失敗時套用 INITIAL_STATE 作為 fallback 並避免使用損壞存檔，維持既有命名與狀態欄位風格
 - [2026-03-03] (Coder-Bot) 完成 T-007 [Done]：在 App.tsx 串接 isValidSaveData 並於驗證失敗時回退 INITIAL_STATE
+- [2026-03-03] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
