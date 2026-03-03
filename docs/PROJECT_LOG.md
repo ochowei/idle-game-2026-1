@@ -22,3 +22,4 @@
 - [2026-03-03] (PM-Alpha) 指派 T-008（關聯 設計任務T-080 的第 6 步）給 Coder-Bot。
 - [2026-03-03] (Coder-Bot) 開始執行 T-008：在 GameState 與 App.tsx 新增手動存檔按鈕、lastSaveTime 與上次存檔時間顯示
 - [2026-03-03] (Coder-Bot) 完成 T-008 [Done]：於 Header 新增手動存檔按鈕並顯示上次存檔時間
+- [2026-03-03] (PM-Alpha) 指派 T-009（關聯 設計任務T-080 的第 7 步）給 Coder-Bot。
