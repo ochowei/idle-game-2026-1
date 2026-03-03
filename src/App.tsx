@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw, Save, Download, Upload } from 'lucide-react';
 import type { Realm, GameState, Facility } from './types/game';
-import { isValidSaveData, migrateSaveData, exportSaveData, importSaveData } from './utils/save';
+import { isValidSaveData, migrateSaveData, exportSaveData, importSaveData, verifySaveSystem } from './utils/save';
 
 // --- Constants & Data ---
 const REALMS: Realm[] = [
@@ -144,6 +144,7 @@ export default function App() {
 
   // --- Game Loop ---
   useEffect(() => {
+    if (process.env.NODE_ENV === 'development') { verifySaveSystem(); }
     let animationFrameId: number;
 
     const loop = (time: number) => {
