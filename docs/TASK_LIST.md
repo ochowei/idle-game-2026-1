@@ -6,3 +6,4 @@ T-004,G-001,T-080,新增 src/utils/save.ts 檔案，並實作 migrateSaveData(da
 T-005,G-001,T-080,在 src/App.tsx 引入 migrateSaveData 函式，並於 useState 初始化讀取 localStorage 存檔時，對解析出的 JSON 資料套用 migrateSaveData 進行舊格式遷移,Coder-Bot,done
 T-006,G-001,T-080,在 src/utils/save.ts 新增 isValidSaveData 函式，並實作存檔完整性驗證（檢查必填欄位如 qi、realm、buildings 等），並將其匯出,Coder-Bot,done
 T-007,G-001,T-080,在 src/App.tsx 的存檔讀取初始化流程中串接 isValidSaveData 驗證；當驗證失敗時套用 INITIAL_STATE 作為 fallback 並避免使用損壞存檔，維持既有命名與狀態欄位風格,Coder-Bot,done
+T-008,G-001,T-080,「手動存檔按鈕 UI」：(1) 在 src/types/game.ts 的 GameState interface 新增 lastSaveTime: number 欄位；(2) 在 src/App.tsx 的 INITIAL_STATE 加入 lastSaveTime: 0 預設值；(3) 在 src/App.tsx UI 適當位置（參考現有 Header 區塊與 lucide-react 圖示用法）新增一個手動存檔按鈕，點擊時將當前 gameState 序列化後寫入 localStorage key 'xianxia_save' 並更新 lastSaveTime 為 Date.now()；(4) 按鈕下方顯示上次存檔時間（格式：「上次存檔：剛剛」或「上次存檔：N 分鐘前」，使用與現有 formatNumber 相同的 helper 風格實作 formatSaveTime 函式）,Coder-Bot,waiting
