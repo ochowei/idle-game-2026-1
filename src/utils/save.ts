@@ -49,3 +49,25 @@ export function isValidSaveData(data: unknown): data is GameState {
 
   return true;
 }
+
+export const SAVE_FILENAME = 'xianxia-save.json';
+
+export function exportSaveData(data: GameState): void {
+  try {
+    const jsonString = JSON.stringify(data, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = SAVE_FILENAME;
+    document.body.appendChild(a);
+    a.click();
+
+    // Cleanup
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Failed to export save data:', error);
+  }
+}

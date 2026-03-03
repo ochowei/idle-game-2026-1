@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw, Save } from 'lucide-react';
+import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw, Save, Download } from 'lucide-react';
 import type { Realm, GameState, Facility } from './types/game';
-import { isValidSaveData, migrateSaveData } from './utils/save';
+import { isValidSaveData, migrateSaveData, exportSaveData } from './utils/save';
 
 // --- Constants & Data ---
 const REALMS: Realm[] = [
@@ -259,6 +259,11 @@ export default function App() {
     }, 1500);
   };
 
+
+  const handleExportSave = () => {
+    exportSaveData(gameState);
+  };
+
   const handleReset = () => {
     if (confirm('確定要散功重修嗎？這將清除所有進度！')) {
       localStorage.removeItem('xianxia_save');
@@ -291,12 +296,23 @@ export default function App() {
           </div>
           <div className="text-4xl font-mono text-amber-300 font-bold tracking-tight">{formatNumber(gameState.qi)}</div>
           <div className="text-sm text-green-400/80 mt-1 font-mono">+{formatNumber(qps)} / 秒</div>
-          <button
-            onClick={handleManualSave}
-            className="mt-3 w-full text-sm text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-500/50 rounded-lg px-3 py-2 flex items-center justify-center gap-2 transition-colors"
-          >
-            <Save className="w-4 h-4 text-amber-500" /> 手動存檔
-          </button>
+
+          <div className="flex gap-2 mt-3 w-full">
+            <button
+              onClick={handleManualSave}
+              className="flex-1 text-sm text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-500/50 rounded-lg px-3 py-2 flex items-center justify-center gap-2 transition-colors"
+            >
+              <Save className="w-4 h-4 text-amber-500" /> 手動存檔
+            </button>
+            <button
+              onClick={handleExportSave}
+              className="flex-1 text-sm text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-500/50 rounded-lg px-3 py-2 flex items-center justify-center gap-2 transition-colors"
+              title="匯出存檔 (JSON)"
+            >
+              <Download className="w-4 h-4 text-amber-500" /> 匯出
+            </button>
+          </div>
+
           <div
             className={`text-xs text-green-400 mt-2 transition-opacity duration-500 ${isSaveSuccessVisible ? 'opacity-100' : 'opacity-0'}`}
           >
