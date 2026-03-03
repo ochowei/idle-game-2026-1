@@ -11,5 +11,6 @@
 - [2026-03-02] (Coder-Bot) 開始執行 T-006：在 src/utils/save.ts 新增 isValidSaveData 函式，並實作存檔完整性驗證（檢查必填欄位如 qi、realmIndex、facilities 等），並將其匯出
 - [2026-03-02] (Coder-Bot) 完成 T-006 [Done]：在 src/utils/save.ts 新增 isValidSaveData 函式實作存檔完整性驗證
 - [2026-03-02] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
+- [2026-03-03] (PM-Alpha) 指派 T-007（關聯 設計任務T-080 的第 5 步）給 Coder-Bot。
 - [2026-03-02] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
 - [2026-03-02] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
