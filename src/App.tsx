@@ -114,7 +114,9 @@ export default function App() {
   const stateRef = useRef(gameState);
   const lastTickRef = useRef(performance.now());
   const saveTimerRef = useRef(0);
+  const saveSuccessTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const logsEndRef = useRef<HTMLDivElement>(null);
+  const [isSaveSuccessVisible, setIsSaveSuccessVisible] = useState(false);
 
   // 同步 React state 到 ref
   useEffect(() => {
@@ -125,6 +127,14 @@ export default function App() {
   useEffect(() => {
     logsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [gameState.logs]);
+
+  useEffect(() => {
+    return () => {
+      if (saveSuccessTimerRef.current) {
+        clearTimeout(saveSuccessTimerRef.current);
+      }
+    };
+  }, []);
 
   // --- Game Loop ---
   useEffect(() => {
@@ -239,6 +249,14 @@ export default function App() {
       stateRef.current = savedState;
       return savedState;
     });
+
+    setIsSaveSuccessVisible(true);
+    if (saveSuccessTimerRef.current) {
+      clearTimeout(saveSuccessTimerRef.current);
+    }
+    saveSuccessTimerRef.current = setTimeout(() => {
+      setIsSaveSuccessVisible(false);
+    }, 1500);
   };
 
   const handleReset = () => {
@@ -279,6 +297,11 @@ export default function App() {
           >
             <Save className="w-4 h-4 text-amber-500" /> 手動存檔
           </button>
+          <div
+            className={`text-xs text-green-400 mt-2 transition-opacity duration-500 ${isSaveSuccessVisible ? 'opacity-100' : 'opacity-0'}`}
+          >
+            存檔成功
+          </div>
           <div className="text-xs text-zinc-500 mt-2">{formatSaveTime(gameState.lastSaveTime)}</div>
         </div>
       </header>
