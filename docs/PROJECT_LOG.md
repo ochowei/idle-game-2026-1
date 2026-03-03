@@ -31,3 +31,4 @@
 - [2026-03-04] (PM-Alpha) 指派 T-011（關聯 設計任務T-080 的第 9 步）給 Coder-Bot。
 - [2026-03-04] (Coder-Bot) 開始執行 T-011：在 src/App.tsx 的手動存檔區塊新增「匯入存檔」按鈕，並在 src/utils/save.ts 新增 importSaveData 函式
 - [2026-03-04] (Coder-Bot) 完成 T-011 [Done]：在 src/utils/save.ts 新增 importSaveData 函式，並在 src/App.tsx 新增「匯入」按鈕與錯誤提示，驗證通過時覆蓋 gameState 並存入 localStorage
+- [2026-03-04] (PM-Alpha) 指派 T-012（關聯 設計任務T-080 的第 10 步）給 Coder-Bot。
