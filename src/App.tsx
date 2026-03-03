@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw, Save, Download } from 'lucide-react';
+import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw, Save, Download, Upload } from 'lucide-react';
 import type { Realm, GameState, Facility } from './types/game';
-import { isValidSaveData, migrateSaveData, exportSaveData } from './utils/save';
+import { isValidSaveData, migrateSaveData, exportSaveData, importSaveData } from './utils/save';
 
 // --- Constants & Data ---
 const REALMS: Realm[] = [
@@ -115,8 +115,11 @@ export default function App() {
   const lastTickRef = useRef(performance.now());
   const saveTimerRef = useRef(0);
   const saveSuccessTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const saveErrorTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const logsEndRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isSaveSuccessVisible, setIsSaveSuccessVisible] = useState(false);
+  const [isSaveErrorVisible, setIsSaveErrorVisible] = useState(false);
 
   // 同步 React state 到 ref
   useEffect(() => {
@@ -132,6 +135,9 @@ export default function App() {
     return () => {
       if (saveSuccessTimerRef.current) {
         clearTimeout(saveSuccessTimerRef.current);
+      }
+      if (saveErrorTimerRef.current) {
+        clearTimeout(saveErrorTimerRef.current);
       }
     };
   }, []);
@@ -264,6 +270,50 @@ export default function App() {
     exportSaveData(gameState);
   };
 
+  const handleImportClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const json = event.target?.result;
+      if (typeof json !== 'string') return;
+
+      const imported = importSaveData(json);
+      if (imported) {
+        const mergedState: GameState = {
+          ...INITIAL_STATE,
+          ...imported,
+          facilities: INITIAL_STATE.facilities.map(f => {
+            const savedF = imported.facilities.find(sf => sf.id === f.id);
+            return savedF ? { ...f, level: savedF.level } : f;
+          }),
+        };
+        localStorage.setItem('xianxia_save', JSON.stringify(mergedState));
+        stateRef.current = mergedState;
+        setGameState(mergedState);
+
+        setIsSaveSuccessVisible(true);
+        if (saveSuccessTimerRef.current) clearTimeout(saveSuccessTimerRef.current);
+        saveSuccessTimerRef.current = setTimeout(() => {
+          setIsSaveSuccessVisible(false);
+        }, 1500);
+      } else {
+        setIsSaveErrorVisible(true);
+        if (saveErrorTimerRef.current) clearTimeout(saveErrorTimerRef.current);
+        saveErrorTimerRef.current = setTimeout(() => {
+          setIsSaveErrorVisible(false);
+        }, 1500);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = '';
+  };
+
   const handleReset = () => {
     if (confirm('確定要散功重修嗎？這將清除所有進度！')) {
       localStorage.removeItem('xianxia_save');
@@ -311,12 +361,31 @@ export default function App() {
             >
               <Download className="w-4 h-4 text-amber-500" /> 匯出
             </button>
+            <button
+              onClick={handleImportClick}
+              className="flex-1 text-sm text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-500/50 rounded-lg px-3 py-2 flex items-center justify-center gap-2 transition-colors"
+              title="匯入存檔 (JSON)"
+            >
+              <Upload className="w-4 h-4 text-amber-500" /> 匯入
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".json"
+              className="hidden"
+              onChange={handleFileChange}
+            />
           </div>
 
           <div
             className={`text-xs text-green-400 mt-2 transition-opacity duration-500 ${isSaveSuccessVisible ? 'opacity-100' : 'opacity-0'}`}
           >
             存檔成功
+          </div>
+          <div
+            className={`text-xs text-red-400 mt-1 transition-opacity duration-500 ${isSaveErrorVisible ? 'opacity-100' : 'opacity-0'}`}
+          >
+            存檔格式無效
           </div>
           <div className="text-xs text-zinc-500 mt-2">{formatSaveTime(gameState.lastSaveTime)}</div>
         </div>
