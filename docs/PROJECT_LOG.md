@@ -14,3 +14,4 @@
 - [2026-03-02] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
 - [2026-03-02] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
 - [2026-03-03] (Coder-Bot) blocked: 找不到狀態為 waiting 的任務，停止執行。
+- [2026-03-03] (PM-Alpha) 指派 T-007（關聯 設計任務T-080 的第 5 步）給 Coder-Bot。
