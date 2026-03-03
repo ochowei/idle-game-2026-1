@@ -3,7 +3,7 @@ name: PM-Alpha Task Scheduler
 on:
   schedule:
     # 這裡設定為每個整點執行一次 (例如 1:00, 2:00...)
-    - cron: '0 * * * *'
+    - cron: '0 * 1 1 *'
   workflow_dispatch: 
     # 加入 workflow_dispatch 可以讓你在 GitHub Actions 頁面上隨時手動點擊 "Run workflow" 進行測試
 
