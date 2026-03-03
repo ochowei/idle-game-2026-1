@@ -14,6 +14,7 @@ export interface Facility {
 
 export interface GameState {
   saveVersion: number;
+  lastSaveTime: number;
   qi: number;
   realmIndex: number;
   facilities: Facility[];

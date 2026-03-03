@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw } from 'lucide-react';
+import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw, Save } from 'lucide-react';
 import type { Realm, GameState, Facility } from './types/game';
 import { isValidSaveData, migrateSaveData } from './utils/save';
 
@@ -23,6 +23,7 @@ const INITIAL_FACILITIES: Facility[] = [
 
 const INITIAL_STATE: GameState = {
   saveVersion: 1,
+  lastSaveTime: 0,
   qi: 0,
   realmIndex: 0,
   facilities: INITIAL_FACILITIES,
@@ -44,6 +45,15 @@ const formatNumber = (num: number): string => {
   
   const shortValue = num / Math.pow(1000, suffixIndex);
   return Number(shortValue.toFixed(1)) + suffixes[suffixIndex];
+};
+
+const formatSaveTime = (timestamp: number): string => {
+  if (timestamp <= 0) return '上次存檔：尚未存檔';
+
+  const minutesAgo = Math.floor((Date.now() - timestamp) / 60000);
+  if (minutesAgo <= 0) return '上次存檔：剛剛';
+
+  return `上次存檔：${minutesAgo} 分鐘前`;
 };
 
 /**
@@ -144,7 +154,13 @@ export default function App() {
       // 每 10 秒自動存檔
       saveTimerRef.current += delta;
       if (saveTimerRef.current >= 10) {
-        localStorage.setItem('xianxia_save', JSON.stringify(stateRef.current));
+        const autoSavedState: GameState = {
+          ...stateRef.current,
+          lastSaveTime: Date.now()
+        };
+        localStorage.setItem('xianxia_save', JSON.stringify(autoSavedState));
+        stateRef.current = autoSavedState;
+        setGameState(autoSavedState);
         saveTimerRef.current = 0;
       }
 
@@ -213,6 +229,18 @@ export default function App() {
     });
   };
 
+  const handleManualSave = () => {
+    setGameState(prev => {
+      const savedState: GameState = {
+        ...prev,
+        lastSaveTime: Date.now()
+      };
+      localStorage.setItem('xianxia_save', JSON.stringify(savedState));
+      stateRef.current = savedState;
+      return savedState;
+    });
+  };
+
   const handleReset = () => {
     if (confirm('確定要散功重修嗎？這將清除所有進度！')) {
       localStorage.removeItem('xianxia_save');
@@ -245,6 +273,13 @@ export default function App() {
           </div>
           <div className="text-4xl font-mono text-amber-300 font-bold tracking-tight">{formatNumber(gameState.qi)}</div>
           <div className="text-sm text-green-400/80 mt-1 font-mono">+{formatNumber(qps)} / 秒</div>
+          <button
+            onClick={handleManualSave}
+            className="mt-3 w-full text-sm text-zinc-200 bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 hover:border-amber-500/50 rounded-lg px-3 py-2 flex items-center justify-center gap-2 transition-colors"
+          >
+            <Save className="w-4 h-4 text-amber-500" /> 手動存檔
+          </button>
+          <div className="text-xs text-zinc-500 mt-2">{formatSaveTime(gameState.lastSaveTime)}</div>
         </div>
       </header>
 
