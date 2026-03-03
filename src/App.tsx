@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw } from 'lucide-react';
 import type { Realm, GameState, Facility } from './types/game';
-import { migrateSaveData } from './utils/save';
+import { isValidSaveData, migrateSaveData } from './utils/save';
 
 // --- Constants & Data ---
 const REALMS: Realm[] = [
@@ -79,13 +79,17 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        const migrated = migrateSaveData(parsed) as Partial<GameState>;
+        const migrated = migrateSaveData(parsed);
+        if (!isValidSaveData(migrated)) {
+          return INITIAL_STATE;
+        }
+
         // 合併初始狀態以處理未來可能新增的設施
         return { 
           ...INITIAL_STATE, 
           ...migrated,
           facilities: INITIAL_STATE.facilities.map(f => {
-            const savedF = migrated.facilities?.find((sf: any) => sf.id === f.id);
+            const savedF = migrated.facilities.find((sf) => sf.id === f.id);
             return savedF ? { ...f, level: savedF.level } : f;
           }) 
         };
