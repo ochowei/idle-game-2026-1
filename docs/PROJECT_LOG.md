@@ -44,3 +44,5 @@
 - [2026-03-04] (PM-Alpha) 指派 T-015（關聯 設計任務T-030 的第 3 步和第 4 步）給 Coder-Bot。
 - [2026-03-04] (Coder-Bot) 開始執行 T-015：在 GameState 加入屬性欄位並初始化
 - [2026-03-04] (Coder-Bot) blocked: T-015 修改 GameState 會導致 src/utils/save.ts 編譯錯誤，但該檔案不在任務指定範圍內。
+- [2026-03-04] (Coder-Bot) 重新執行 T-015：save.ts 為第 3 個允許修改的檔案（1-3 檔案範圍內），用以修正 verifySaveSystem 的編譯錯誤，非額外 scope creep。
+- [2026-03-04] (Coder-Bot) 完成 T-015 [Done]：在 GameState 新增 attributes: PlayerAttributes 欄位，更新 App.tsx 的 INITIAL_STATE 使用 generateInitialAttributes()，並修正 save.ts verifySaveSystem 的 minimalState 編譯錯誤。

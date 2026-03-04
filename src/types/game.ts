@@ -35,4 +35,5 @@ export interface GameState {
   realmIndex: number;
   facilities: Facility[];
   logs: string[];
+  attributes: PlayerAttributes;
 }
