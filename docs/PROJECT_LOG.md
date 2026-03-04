@@ -38,3 +38,6 @@
 - [2026-03-04] (PM-Alpha) 指派 T-013（關聯 設計任務T-030 的第 1 步）給 Coder-Bot。
 - [2026-03-04] (Coder-Bot) 開始執行 T-013：在 src/types/game.ts 定義 PlayerAttributes interface 與 ATTRIBUTE_LIMITS 常數
 - [2026-03-04] (Coder-Bot) 完成 T-013 [Done]：在 src/types/game.ts 新增 PlayerAttributes interface（5 個 number 欄位）與 ATTRIBUTE_LIMITS 常數（各屬性上下限 0-100）並匯出
+- [2026-03-04] (PM-Alpha) 指派 T-014（關聯 設計任務T-030 的第 2 步）給 Coder-Bot。
+- [2026-03-04] (Coder-Bot) 開始執行 T-014：新增 src/utils/attributes.ts 並實作 generateInitialAttributes 函式
+- [2026-03-04] (Coder-Bot) 完成 T-014 [Done]：新增 src/utils/attributes.ts，實作 generateInitialAttributes 函式以基準值 50 ± 5 隨機偏移並 clamp 至 ATTRIBUTE_LIMITS 範圍
