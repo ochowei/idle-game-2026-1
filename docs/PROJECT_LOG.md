@@ -44,3 +44,6 @@
 - [2026-03-04] (PM-Alpha) 指派 T-015（關聯 設計任務T-030 的第 3 步和第 4 步）給 Coder-Bot。
 - [2026-03-04] (Coder-Bot) 開始執行 T-015：在 GameState 加入屬性欄位並初始化
 - [2026-03-04] (Coder-Bot) blocked: T-015 修改 GameState 會導致 src/utils/save.ts 編譯錯誤，但該檔案不在任務指定範圍內。
+- [2026-03-04] (PM-Alpha) T-015 解除封鎖：擴大任務範圍，加入 src/utils/save.ts 的 isValidSaveData 與 migrateSaveData 更新（以涵蓋新 attributes 欄位的驗證與遷移），並將狀態重置為 waiting。
+- [2026-03-04] (Coder-Bot) 開始執行 T-015：在 GameState 新增 attributes 欄位、更新 INITIAL_STATE、更新 save.ts 驗證與遷移邏輯
+- [2026-03-04] (Coder-Bot) 完成 T-015 [Done]：在 GameState 加入 attributes: PlayerAttributes 欄位，更新 INITIAL_STATE 使用 generateInitialAttributes()，更新 isValidSaveData 驗證屬性欄位，更新 migrateSaveData 於缺失時補齊 attributes

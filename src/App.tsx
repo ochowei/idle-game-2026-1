@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Zap, ArrowUpCircle, ScrollText, Pickaxe, RotateCcw, Save, Download, Upload } from 'lucide-react';
 import type { Realm, GameState, Facility } from './types/game';
 import { isValidSaveData, migrateSaveData, exportSaveData, importSaveData, verifySaveSystem } from './utils/save';
+import { generateInitialAttributes } from './utils/attributes';
 
 // --- Constants & Data ---
 const REALMS: Realm[] = [
@@ -26,6 +27,7 @@ const INITIAL_STATE: GameState = {
   lastSaveTime: 0,
   qi: 0,
   realmIndex: 0,
+  attributes: generateInitialAttributes(),
   facilities: INITIAL_FACILITIES,
   logs: ["【系統】歡迎來到凡人修仙傳：放置篇。開始你的修仙之旅吧！"],
 };

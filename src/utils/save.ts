@@ -1,4 +1,5 @@
 import { GameState, Facility } from '../types/game';
+import { generateInitialAttributes } from './attributes';
 
 export function migrateV1toV2(data: unknown): unknown {
   if (typeof data !== 'object' || data === null) return data;
@@ -17,6 +18,10 @@ export function migrateSaveData(data: unknown): unknown {
     migratedData = migrateV1toV2(migratedData) as Record<string, unknown>;
   }
 
+  if (typeof migratedData.attributes !== 'object' || migratedData.attributes === null) {
+    migratedData = { ...migratedData, attributes: generateInitialAttributes() };
+  }
+
   return migratedData;
 }
 
@@ -30,6 +35,13 @@ export function isValidSaveData(data: unknown): data is GameState {
   if (typeof state.saveVersion !== 'number') return false;
   if (typeof state.qi !== 'number') return false;
   if (typeof state.realmIndex !== 'number') return false;
+  if (typeof state.attributes !== 'object' || state.attributes === null) return false;
+  const attrs = state.attributes as Record<string, unknown>;
+  if (typeof attrs.aptitude !== 'number') return false;
+  if (typeof attrs.fortune !== 'number') return false;
+  if (typeof attrs.opportunity !== 'number') return false;
+  if (typeof attrs.nature !== 'number') return false;
+  if (typeof attrs.darkness !== 'number') return false;
   if (!Array.isArray(state.facilities)) return false;
   if (!Array.isArray(state.logs)) return false;
 
@@ -85,6 +97,7 @@ export function verifySaveSystem(): boolean {
     lastSaveTime: 0,
     qi: 0,
     realmIndex: 0,
+    attributes: generateInitialAttributes(),
     facilities: [],
     logs: [],
   };

@@ -33,6 +33,7 @@ export interface GameState {
   lastSaveTime: number;
   qi: number;
   realmIndex: number;
+  attributes: PlayerAttributes;
   facilities: Facility[];
   logs: string[];
 }
