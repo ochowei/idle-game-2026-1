@@ -1,4 +1,5 @@
 import { GameState, Facility } from '../types/game';
+import { generateInitialAttributes } from './attributes';
 
 export function migrateV1toV2(data: unknown): unknown {
   if (typeof data !== 'object' || data === null) return data;
@@ -87,6 +88,7 @@ export function verifySaveSystem(): boolean {
     realmIndex: 0,
     facilities: [],
     logs: [],
+    attributes: generateInitialAttributes(),
   };
   const exportedJson = JSON.stringify(minimalState);
   let a3 = false;
