@@ -36,3 +36,5 @@
 - [2026-03-04] (Coder-Bot) 完成 T-012 [Done]：在 src/utils/save.ts 新增 verifySaveSystem 函式以 console.assert 驗證四個存檔場景，並於 App.tsx 的 Game Loop useEffect 最前方加入開發模式呼叫
 - [2026-03-04] (PM-Alpha) T-080 全部 10 步完成，狀態更新為 done。選取下一設計任務 T-030（玩家屬性定義與資料結構），狀態更新為 in-progress。
 - [2026-03-04] (PM-Alpha) 指派 T-013（關聯 設計任務T-030 的第 1 步）給 Coder-Bot。
+- [2026-03-04] (Coder-Bot) 開始執行 T-013：在 src/types/game.ts 定義 PlayerAttributes interface 與 ATTRIBUTE_LIMITS 常數
+- [2026-03-04] (Coder-Bot) 完成 T-013 [Done]：在 src/types/game.ts 新增 PlayerAttributes interface（5 個 number 欄位）與 ATTRIBUTE_LIMITS 常數（各屬性上下限 0-100）並匯出
