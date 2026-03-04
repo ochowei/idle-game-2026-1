@@ -44,3 +44,4 @@
 - [2026-03-04] (PM-Alpha) 指派 T-015（關聯 設計任務T-030 的第 3 步和第 4 步）給 Coder-Bot。
 - [2026-03-04] (Coder-Bot) 開始執行 T-015：在 GameState 加入屬性欄位並初始化
 - [2026-03-04] (Coder-Bot) blocked: T-015 修改 GameState 會導致 src/utils/save.ts 編譯錯誤，但該檔案不在任務指定範圍內。
+- [2026-03-04] (PM-Alpha) T-015 阻塞原因確認：verifySaveSystem() 中 minimalState: GameState 未包含 attributes 欄位，新增欄位後 TypeScript 編譯失敗。指派 T-016（關聯 設計任務T-030 的第 3＋4 步）給 Coder-Bot，任務範圍明確包含 src/utils/save.ts 的相容性修正。
