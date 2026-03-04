@@ -42,3 +42,5 @@
 - [2026-03-04] (Coder-Bot) 開始執行 T-014：實作屬性生成函式
 - [2026-03-04] (Coder-Bot) 完成 T-014 [Done]：實作初始屬性生成函式
 - [2026-03-04] (PM-Alpha) 指派 T-015（關聯 設計任務T-030 的第 3 步和第 4 步）給 Coder-Bot。
+- [2026-03-04] (Coder-Bot) 開始執行 T-015：在 GameState 加入屬性欄位並初始化
+- [2026-03-04] (Coder-Bot) blocked: T-015 修改 GameState 會導致 src/utils/save.ts 編譯錯誤，但該檔案不在任務指定範圍內。
